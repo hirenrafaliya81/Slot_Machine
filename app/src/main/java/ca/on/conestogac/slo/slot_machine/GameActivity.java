@@ -24,19 +24,21 @@ public class GameActivity extends AppCompatActivity {
     private AnimationDrawable animation1, animation2, animation3;
     private ImageView animation1Image, animation2Image, animation3Image;
     public Symbols symbols;
-    public int cash_won = 0;
+    public static int cash_won = 0;
     public static int user_status = 0;
     public static int scash_won = 0;
     private int user_won = 0;
     private SlotMachine slotMachine;
     private ImageView winnerImage;
     private SlotMachine database;
+    private SharedPref pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         getSupportActionBar().setTitle("Slot Machine Game");
+        pref = new SharedPref(this);
 
         cash = findViewById(R.id.playerFundsText);
         cash.setText("0"); //set the default cash amount
@@ -138,6 +140,12 @@ public class GameActivity extends AppCompatActivity {
         //add 100$ when the user win
         cash_won = cash_won + 100;
         cash.setText(Integer.toString(cash_won));
+
+        if(pref.getBoolean("save_game")){
+            int cash = pref.getInt("cash_won");
+            cash += 100;
+            pref.setInt("cash_won", cash);
+        }
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

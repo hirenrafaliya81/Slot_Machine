@@ -10,13 +10,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class StatsActivity extends AppCompatActivity {
     public SQLiteOpenHelper helper;
     private TextView totalCash;
     private  TextView currentCash;
     private TextView reset;
-    GameActivity gameActivity = new GameActivity();
+    SharedPref pref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SlotMachine slotMachine = (SlotMachine) getApplication();
@@ -24,12 +26,13 @@ public class StatsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_stats2);
         getSupportActionBar().setTitle("Statistics");
 
-      //write to statistics
-        int gett = slotMachine.getTotal();
+        pref = new SharedPref(this);
+
+        //write to statistics
         totalCash = findViewById(R.id.totalMoney);
         currentCash = findViewById(R.id.currentCash);
         reset = findViewById(R.id.btn_reset);
-        totalCash.setText("  " + String.valueOf( gett));
+        totalCash.setText("  " + pref.getInt("cash_won"));
         int cash = GameActivity.getCurrent_status();
         currentCash.setText( String.valueOf(cash));
 
@@ -37,7 +40,12 @@ public class StatsActivity extends AppCompatActivity {
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((SlotMachine) getApplication()).reset();
+                pref.setInt("cash_won",0);
+                currentCash.setText("0");
+                totalCash.setText("0");
+                GameActivity.cash_won = 0;
+
+                Toast.makeText(StatsActivity.this, "Reset", Toast.LENGTH_SHORT).show();
                 System.out.println("Database Reset");
             }
         });

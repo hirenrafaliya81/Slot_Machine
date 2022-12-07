@@ -1,9 +1,67 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
-        android:id="@+id/settings"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</LinearLayout>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        app:fontFamily="sans-serif-medium"
+        android:textColor="@color/teal_200"
+        android:textSize="18sp"
+        android:id="@+id/tvSettings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="52dp"
+        android:layout_marginStart="32dp"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save game on close"
+        app:fontFamily="sans-serif"
+        android:textSize="18sp"
+        android:id="@+id/tvSaveGame"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSettings"
+        android:layout_marginTop="22dp"
+        android:layout_marginStart="32dp"
+        />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintTop_toTopOf="@+id/tvSaveGame"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSaveGame"
+        android:id="@+id/switchSaveGame"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dark Theme"
+        app:fontFamily="sans-serif"
+        android:textSize="18sp"
+        android:id="@+id/tvDarkTheme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchSaveGame"
+        android:layout_marginTop="22dp"
+        android:layout_marginStart="32dp"
+        />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintTop_toTopOf="@+id/tvDarkTheme"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDarkTheme"
+        android:id="@+id/switchDarkTheme"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
